@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/12 16:36:41 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:46:02 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ void	key_hook(mlx_key_data_t keydata, void* param)
 
 int main(void)
 {
-	mlx_t*	mlx;
+	mlx_t*			mlx;
+	mlx_image_t*	img;
 
-	mlx = mlx_init(800, 600, "MLX42 Window", true);
+	mlx = mlx_init(800, 600, "CUB3D", true);
+	img = load_texture(mlx, "textures/wall.png");
 	if (!mlx)
 	{
 		fprintf(stderr, "Failed to initialize MLX\n");
 		return (EXIT_FAILURE);
 	}
+	if (img)
+		mlx_image_to_window(mlx, img, 100, 100);
 	mlx_key_hook(mlx, key_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
