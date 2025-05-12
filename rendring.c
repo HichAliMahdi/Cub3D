@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/12 16:44:00 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:58:26 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ mlx_image_t*	load_texture(mlx_t* mlx, const char* path)
 	{
 		fprintf(stderr, "Failed to convert texture to image: %s\n", path);
 	}
-
 	return (img);
+}
+
+t_textures	load_all_textures(mlx_t* mlx)
+{
+	t_textures	textures;
+
+	textures.wall = load_texture(mlx, "textures/wall.png");
+	textures.floor = load_texture(mlx, "textures/floor.png");
+	return (textures);
 }
