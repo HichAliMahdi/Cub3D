@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:18:21 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:21:52 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:29:54 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,34 @@ void	init_player_direction(t_player *player, char dir_char)
 	}
 }
 
+static void	set_player(t_game *game, int x, int y, char dir)
+{
+	game->player.pos_x = x + 0.5;
+	game->player.pos_y = y + 0.5;
+	init_player_direction(&game->player, dir);
+	game->player.move_speed = 0.05;
+	game->player.rot_speed = 0.03;
+	game->map[y][x] = '0';
+}
 
 bool	init_player(t_game *game)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	char	dir;
 
 	if (!game->map)
 		return (false);
-
 	y = 0;
 	while (game->map[y])
 	{
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (game->map[y][x] == 'N' || game->map[y][x] == 'S' ||
-				game->map[y][x] == 'E' || game->map[y][x] == 'W')
+			dir = game->map[y][x];
+			if (dir == 'N' || dir == 'S' || dir == 'E' || dir == 'W')
 			{
-				game->player.pos_x = x + 0.5;
-				game->player.pos_y = y + 0.5;
-				init_player_direction(&game->player, game->map[y][x]);
-				game->player.move_speed = 0.05;
-				game->player.rot_speed = 0.03;
-				game->map[y][x] = '0';
+				set_player(game, x, y, dir);
 				return (true);
 			}
 			x++;

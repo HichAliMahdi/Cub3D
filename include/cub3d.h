@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:22:46 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:28:28 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "player.h"
 
 # define BUFFER_SIZE 42
+# define TILE_SIZE 64
 
 typedef struct s_gnl
 {
