@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:28:28 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:39:43 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <sys/param.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include "player.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 # include "map.h"
-# include "player.h"
 
 # define BUFFER_SIZE 42
 # define TILE_SIZE 64

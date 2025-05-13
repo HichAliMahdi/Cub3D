@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 16:20:37 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:33:07 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ t_textures	*load_all_textures(mlx_t *mlx)
 		free(textures);
 		return (NULL);
 	}
-	textures->player = NULL;
+	textures->player = load_texture(mlx, "./textures/player.png");
+	if (!textures->player)
+	{
+		mlx_delete_image(mlx, textures->wall);
+		mlx_delete_image(mlx, textures->floor);
+		free(textures);
+		return (NULL);
+	}
 	return (textures);
 }
