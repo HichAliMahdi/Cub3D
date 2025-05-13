@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:33:07 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:44:11 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,30 @@ mlx_image_t	*load_texture(mlx_t *mlx, const char *path)
 	return (img);
 }
 
+static void	free_textures(mlx_t *mlx, t_textures *tex)
+{
+	if (tex->wall)
+		mlx_delete_image(mlx, tex->wall);
+	if (tex->floor)
+		mlx_delete_image(mlx, tex->floor);
+	free(tex);
+}
+
 t_textures	*load_all_textures(mlx_t *mlx)
 {
-	t_textures	*textures;
+	t_textures	*tex;
 
-	textures = malloc(sizeof(t_textures));
-	if (!textures)
+	tex = malloc(sizeof(t_textures));
+	if (!tex)
 		return (NULL);
-	textures->wall = load_texture(mlx, "./textures/wall.png");
-	if (!textures->wall)
-	{
-		free(textures);
-		return (NULL);
-	}
-	textures->floor = load_texture(mlx, "./textures/floor.png");
-	if (!textures->floor)
-	{
-		mlx_delete_image(mlx, textures->wall);
-		free(textures);
-		return (NULL);
-	}
-	textures->player = load_texture(mlx, "./textures/player.png");
-	if (!textures->player)
-	{
-		mlx_delete_image(mlx, textures->wall);
-		mlx_delete_image(mlx, textures->floor);
-		free(textures);
-		return (NULL);
-	}
-	return (textures);
+	tex->wall = load_texture(mlx, "./textures/wall.png");
+	if (!tex->wall)
+		return (free(tex), NULL);
+	tex->floor = load_texture(mlx, "./textures/floor.png");
+	if (!tex->floor)
+		return (free_textures(mlx, tex), NULL);
+	tex->player = load_texture(mlx, "./textures/player.png");
+	if (!tex->player)
+		return (free_textures(mlx, tex), NULL);
+	return (tex);
 }

@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:33:56 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:44:59 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ static bool	init_game(t_game *game, char *filename)
 		i++;
 	game->mlx = mlx_init(800, 600, "CUB3D", true);
 	if (!game->mlx)
-	{
-		free_map(game->map);
-		return (false);
-	}
+		return (free_map(game->map), false);
 	game->textures = load_all_textures(game->mlx);
 	if (!game->textures)
 	{
