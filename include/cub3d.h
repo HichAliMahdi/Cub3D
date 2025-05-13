@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/12 19:29:53 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:54:50 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,27 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/param.h>
+# include <stdbool.h>
+# include <fcntl.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 # include "map.h"
+
+# define BUFFER_SIZE 42
+
+typedef struct s_gnl
+{
+	char	buffer[BUFFER_SIZE];
+	int		buffer_read;
+	int		buffer_pos;
+}	t_gnl;
+
+typedef struct s_line
+{
+	char	*str;
+	int		size;
+	int		allocated;
+}	t_line;
 
 typedef struct s_map
 {
@@ -59,5 +77,5 @@ int				main(int argc, char **argv);
 mlx_image_t		*load_texture(mlx_t *mlx, const char *path);
 t_textures		*load_all_textures(mlx_t *mlx);
 void			cleanup(t_game *game);
-
+char			*get_next_line(int fd);
 #endif
