@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:39:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:59:59 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/param.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include "raycasting.h"
 # include "player.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
@@ -28,6 +29,10 @@
 
 # define BUFFER_SIZE 42
 # define TILE_SIZE 64
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 typedef struct s_gnl
 {
@@ -66,6 +71,11 @@ typedef struct s_textures
 	mlx_image_t	*wall;
 	mlx_image_t	*floor;
 	mlx_image_t	*player;
+	mlx_image_t	*north;
+	mlx_image_t	*south;
+	mlx_image_t	*east;
+	mlx_image_t	*west;
+	mlx_image_t	*screen;
 }	t_textures;
 
 typedef struct s_player
