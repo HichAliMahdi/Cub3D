@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 16:54:50 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:22:46 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 # include "map.h"
+# include "player.h"
 
 # define BUFFER_SIZE 42
 
@@ -66,11 +67,25 @@ typedef struct s_textures
 	mlx_image_t	*player;
 }	t_textures;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
+	int		size;
+}	t_player;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	char		**map;
 	t_textures	*textures;
+	t_player	player;
 }	t_game;
 
 int				main(int argc, char **argv);
