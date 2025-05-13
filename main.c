@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:44:59 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:24:07 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool	init_game(t_game *game, char *filename)
 	i = 0;
 	while (game->map[i])
 		i++;
-	game->mlx = mlx_init(800, 600, "CUB3D", true);
+	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "CUB3D", true);
 	if (!game->mlx)
 		return (free_map(game->map), false);
 	game->textures = load_all_textures(game->mlx);
@@ -59,18 +59,16 @@ static void	game_loop(void *param)
 
 	game = (t_game *)param;
 	handle_player_movement(game);
+	render_frame(game);
 	render_player(game);
 }
 
 static void	run_game(t_game *game)
 {
 	mlx_key_hook(game->mlx, key_hook, game->mlx);
-	if (game->textures->wall)
-		mlx_image_to_window(game->mlx, game->textures->wall, 100, 100);
-	if (game->textures->floor)
-		mlx_image_to_window(game->mlx, game->textures->floor, 200, 100);
+	render_frame(game);
 	mlx_loop_hook(game->mlx, game_loop, game);
-	printf("Starting MLX loop\n");
+	printf("Starting Game\n");
 	mlx_loop(game->mlx);
 }
 
@@ -79,7 +77,10 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
+	{
+		printf("Usage: %s <map_file.cub>\n", argv[0]);
 		return (EXIT_FAILURE);
+	}
 	if (!init_game(&game, argv[1]))
 	{
 		cleanup(&game);

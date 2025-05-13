@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:23:03 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:30:14 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:23:16 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	handle_player_movement(t_game *game)
 		move_player(game, game->player.dir_x, game->player.dir_y);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_player(game, -game->player.dir_x, -game->player.dir_y);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_player(game, -game->player.dir_y, game->player.dir_x);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		move_player(game, -game->player.dir_y, game->player.dir_x);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		move_player(game, game->player.dir_y, -game->player.dir_x);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_player(&game->player, -game->player.rot_speed);
