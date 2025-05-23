@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:53:25 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 19:12:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:23:56 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	clear_screen(t_game *game)
 {
 	if (!game->textures->screen)
 		return ;
-	draw_screen_colors(game, 0x87CEEB, 0x8B4513);
+	draw_screen_colors(game, 0x228B22, 0x191970);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 19:17:35 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:28:18 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static void	free_textures(mlx_t *mlx, t_textures *tex)
 {
 	if (tex->wall)
 		mlx_delete_image(mlx, tex->wall);
-	if (tex->floor)
-		mlx_delete_image(mlx, tex->floor);
 	if (tex->player)
 		mlx_delete_image(mlx, tex->player);
 	if (tex->north)
@@ -59,9 +57,6 @@ t_textures	*load_all_textures(mlx_t *mlx)
 	tex->wall = load_texture(mlx, "./textures/wall.png");
 	if (!tex->wall)
 		return (free(tex), NULL);
-	tex->floor = load_texture(mlx, "./textures/floor.png");
-	if (!tex->floor)
-		return (free_textures(mlx, tex), NULL);
 	tex->north = load_texture(mlx, "./textures/north_wall.png");
 	if (!tex->north)
 		return (free_textures(mlx, tex), NULL);
