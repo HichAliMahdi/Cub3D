@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/05/13 18:15:19 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/05/23 22:09:59 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ BUILD_DIR     = $(MLX_DIR)/build
 SRC     = main.c rendering.c get_next_line.c utils.c \
           $(MAPDIR)/map_parsing.c $(MAPDIR)/map_utils.c \
           $(MAPDIR)/map_validation.c $(MAPDIR)/map_edges.c \
+		  $(MAPDIR)/map_allocations.c $(MAPDIR)/map_check.c \
+		  $(MAPDIR)/map_enclosure.c \
 		  $(PLAYERDIR)/init_player.c $(PLAYERDIR)/move_player.c \
 		  $(PLAYERDIR)/player_utils.c $(PLAYERDIR)/render_player.c \
 		  $(PLAYERDIR)/rotate_player.c \

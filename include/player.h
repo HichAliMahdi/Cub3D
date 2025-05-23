@@ -6,13 +6,12 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:20:03 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:41:42 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:11:20 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
-
 
 typedef struct s_game	t_game;
 typedef struct s_player	t_player;

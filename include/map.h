@@ -6,20 +6,37 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:01:37 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 16:26:15 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/05/23 22:17:32 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-void	free_map_lines(char **map, int count);
-bool	resize_map(char ***map, int *cap, int lines);
+typedef struct s_mapinfo
+{
+	char	**map;
+	bool	**visited;
+	int		width;
+	int		height;
+}	t_mapinfo;
+
+bool	**alloc_visited(int w, int h);
+void	free_visited(bool **v, int h);
+bool	find_player(char **map, int *x, int *y);
 bool	is_valid_map_char(char c);
 int		count_player_starts(char **map);
+int		get_map_dimensions(char **map, int *width, int *height);
+bool	perform_flood(char **map, int w, int h);
 bool	is_map_enclosed(char **map);
-bool	validate_map(char **map);
+bool	is_walkable(char c);
+bool	check_boundary(t_mapinfo *info, int x, int y, char c);
+char	get_map_char(char **map, int x, int y);
+bool	flood_fill(t_mapinfo *info, int x, int y);
 char	**parse_map(const char *filename);
+void	free_map_lines(char **map, int count);
+bool	resize_map(char ***map, int *cap, int lines);
+bool	validate_map(char **map);
 void	free_map(char **map);
 
 #endif
