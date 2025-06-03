@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 18:17:20 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:35:27 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct s_game
 	char		**map;
 	t_textures	*textures;
 	t_player	player;
+	int			screen_width;
+	int			screen_height;
 }	t_game;
 
 int				main(int argc, char **argv);
