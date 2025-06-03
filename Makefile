@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/03 12:04:35 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/06/03 15:39:01 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX_DIR       = MLX42
 BUILD_DIR     = $(MLX_DIR)/build
 
 # Source files
-SRC     = main.c rendering.c get_next_line.c utils.c \
+SRC     = main.c rendering.c get_next_line.c game_init.c utils.c \
           $(MAPDIR)/map_parsing.c $(MAPDIR)/map_utils.c \
           $(MAPDIR)/map_validation.c $(MAPDIR)/map_edges.c \
 		  $(MAPDIR)/map_allocations.c $(MAPDIR)/map_check.c \
@@ -32,7 +32,7 @@ SRC     = main.c rendering.c get_next_line.c utils.c \
 		  $(PLAYERDIR)/player_utils.c $(PLAYERDIR)/render_player.c \
 		  $(PLAYERDIR)/rotate_player.c \
 		  $(RAYCASTINGDIR)/raycasting_dda.c $(RAYCASTINGDIR)/raycasting_draw.c \
-		  $(RAYCASTINGDIR)/raycasting_init.c $(RAYCASTINGDIR)/raycasting.c 
+		  $(RAYCASTINGDIR)/raycasting_init.c $(RAYCASTINGDIR)/raycasting.c
 
 OBJ     = $(SRC:.c=.o)
 

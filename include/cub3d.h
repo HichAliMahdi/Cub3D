@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/03 15:35:27 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:38:33 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,7 @@ void			cleanup(t_game *game);
 char			*get_next_line(int fd);
 void			render_frame(t_game *game);
 mlx_image_t		*select_texture(t_game *game, t_ray *ray);
+bool			initialize_game_struct(t_game *game, char *filename);
+bool			finalize_game_init(t_game *game);
+bool			init_game(t_game *game, char *filename);
 #endif
