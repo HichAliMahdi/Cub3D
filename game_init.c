@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:36:48 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/03 15:38:02 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:32:17 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,24 @@
 
 bool	initialize_game_struct(t_game *game, char *filename)
 {
-	int	i;
-
 	ft_memset(game, 0, sizeof(t_game));
-	game->map = parse_map(filename);
-	if (!game->map)
+
+	if (!parse_scene_file(filename, &game->config, &game->map))
 		return (false);
-	i = 0;
-	while (game->map[i])
-		i++;
+	if (!validate_map(game->map))
+	{
+		fprintf(stderr, "Error\nInvalid map\n");
+		free_map(game->map);
+		free_scene_config(&game->config);
+		return (false);
+	}
 	game->mlx = mlx_init(800, 600, "CUB3D", true);
 	if (!game->mlx)
-		return (free_map(game->map), false);
+	{
+		free_map(game->map);
+		free_scene_config(&game->config);
+		return (false);
+	}
 	game->screen_width = 800;
 	game->screen_height = 600;
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
@@ -34,7 +40,7 @@ bool	initialize_game_struct(t_game *game, char *filename)
 
 bool	finalize_game_init(t_game *game)
 {
-	game->textures = load_all_textures(game->mlx);
+	game->textures = load_all_textures(game->mlx, &game->config);
 	if (!game->textures)
 	{
 		cleanup(game);

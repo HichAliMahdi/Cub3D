@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/03 15:38:33 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:35:18 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,26 @@
 # define SCREEN_HEIGHT 600
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
+
+typedef struct s_scene_config
+{
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	t_color	floor_color;
+	t_color	ceiling_color;
+	bool	textures_set[4];
+	bool	floor_set;
+	bool	ceiling_set;
+}	t_scene_config;
 
 typedef struct s_gnl
 {
@@ -93,17 +113,18 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	mlx_t		*mlx;
-	char		**map;
-	t_textures	*textures;
-	t_player	player;
-	int			screen_width;
-	int			screen_height;
+	mlx_t			*mlx;
+	char			**map;
+	t_textures		*textures;
+	t_player		player;
+	int				screen_width;
+	int				screen_height;
+	t_scene_config	config;
 }	t_game;
 
 int				main(int argc, char **argv);
 mlx_image_t		*load_texture(mlx_t *mlx, const char *path);
-t_textures		*load_all_textures(mlx_t *mlx);
+t_textures		*load_all_textures(mlx_t *mlx, t_scene_config *config);
 void			cleanup(t_game *game);
 char			*get_next_line(int fd);
 void			render_frame(t_game *game);
