@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:52:08 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 19:13:40 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:44:48 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct s_ray
 }	t_ray;
 
 void		perform_dda(t_game *game, t_ray *ray);
-void		draw_walls(t_game *game, t_ray *ray, int x);
 void		calculate_wall_data(t_ray *ray);
 void		setup_texturing(t_game *game, t_ray *ray);
+void		draw_walls(t_game *game, t_ray *ray, int x);
 void		init_ray(t_game *game, t_ray *ray, int x);
-void		cast_rays(t_game *game);
 void		clear_screen(t_game *game);
+void		cast_rays(t_game *game);
 #endif

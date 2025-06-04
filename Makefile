@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/03 15:39:01 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/06/04 16:43:01 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS  = -Wall -Wextra -Werror -Ilibft -IMLX42/include
 # Directories
 SRCDIR        = .
 MAPDIR        = map
+PARSEDIR      = parsing
 PLAYERDIR     = player
 RAYCASTINGDIR = raycasting
 MLX_DIR       = MLX42
@@ -32,7 +33,8 @@ SRC     = main.c rendering.c get_next_line.c game_init.c utils.c \
 		  $(PLAYERDIR)/player_utils.c $(PLAYERDIR)/render_player.c \
 		  $(PLAYERDIR)/rotate_player.c \
 		  $(RAYCASTINGDIR)/raycasting_dda.c $(RAYCASTINGDIR)/raycasting_draw.c \
-		  $(RAYCASTINGDIR)/raycasting_init.c $(RAYCASTINGDIR)/raycasting.c
+		  $(RAYCASTINGDIR)/raycasting_init.c $(RAYCASTINGDIR)/raycasting.c \
+		  $(PARSEDIR)/scene_file_parser.c $(PARSEDIR)/scene_parsing.c
 
 OBJ     = $(SRC:.c=.o)
 

@@ -6,11 +6,19 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:53:25 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/23 22:23:56 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:41:00 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+/**
+ * Convert RGB color to uint32_t format for MLX
+ */
+static uint32_t	rgb_to_color(t_color color)
+{
+	return ((color.r << 24) | (color.g << 16) | (color.b << 8) | 0xFF);
+}
 
 /**
  * Draw ceiling and floor colors
@@ -42,9 +50,14 @@ static void	draw_screen_colors(t_game *game,
  */
 void	clear_screen(t_game *game)
 {
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
+
 	if (!game->textures->screen)
 		return ;
-	draw_screen_colors(game, 0x228B22, 0x191970);
+	ceiling_color = rgb_to_color(game->config.ceiling_color);
+	floor_color = rgb_to_color(game->config.floor_color);
+	draw_screen_colors(game, ceiling_color, floor_color);
 }
 
 /**

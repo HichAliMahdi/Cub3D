@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/04 16:35:18 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:47:35 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,12 @@ mlx_image_t		*select_texture(t_game *game, t_ray *ray);
 bool			initialize_game_struct(t_game *game, char *filename);
 bool			finalize_game_init(t_game *game);
 bool			init_game(t_game *game, char *filename);
+bool			parse_scene_file(const char *filename,
+					t_scene_config *config, char ***map);
+bool			parse_texture_path(char *line, char **texture_path);
+bool			parse_color(char *line, t_color *color);
+bool			parse_scene_element(char *line, t_scene_config *config);
+bool			validate_scene_config(t_scene_config *config);
+void			free_scene_config(t_scene_config *config);
+
 #endif
