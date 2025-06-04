@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/03 15:37:05 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:39:50 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-/* New resize callback function */
 void	resize_hook(int32_t width, int32_t height, void *param)
 {
 	t_game	*game;
