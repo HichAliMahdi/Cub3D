@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/04 16:33:28 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:01:35 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_textures	*load_all_textures(mlx_t *mlx, t_scene_config *config)
 	tex->west = load_texture(mlx, config->west_texture);
 	if (!tex->west)
 		return (free_textures(mlx, tex), NULL);
-	tex->wall = load_texture(mlx, "./textures/wall.png");
 	return (tex);
 }
 
