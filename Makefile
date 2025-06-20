@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/04 16:43:01 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/06/20 01:38:34 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC     = main.c rendering.c get_next_line.c game_init.c utils.c \
 OBJ     = $(SRC:.c=.o)
 
 # Output
-NAME    = cub3d
+NAME    = cub3D
 
 # Libraries
 LIBFT   = libft/libft.a

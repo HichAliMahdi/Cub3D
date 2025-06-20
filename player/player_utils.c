@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:23:10 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:31:25 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/20 02:05:52 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,17 @@ bool	is_wall(t_game *game, double x, double y)
 	if (!game->map[map_y] || !game->map[map_y][map_x])
 		return (true);
 	return (game->map[map_y][map_x] == '1');
+}
+
+bool	is_wall_with_padding(t_game *game, double x, double y)
+{
+	double	padding;
+
+	padding = 0.1;
+	if (is_wall(game, x - padding, y - padding)
+		|| is_wall(game, x + padding, y - padding)
+		|| is_wall(game, x - padding, y + padding)
+		|| is_wall(game, x + padding, y + padding))
+		return (true);
+	return (false);
 }
