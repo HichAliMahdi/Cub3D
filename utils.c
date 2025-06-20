@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:34:25 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/20 02:12:42 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:36:59 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,9 @@ void	cleanup(t_game *game)
 		game->mlx = NULL;
 	}
 	free_scene_config(&game->config);
+}
+
+void	check_leaks(void)
+{
+	system("leaks cub3D");
 }

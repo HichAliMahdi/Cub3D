@@ -6,16 +6,11 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/20 01:44:44 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:36:44 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
-
-void	check_leaks(void)
-{
-	system("leaks cub3D");
-}
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
