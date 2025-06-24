@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:52 by hali-mah          #+#    #+#             */
-/*   Updated: 2024/10/11 13:07:43 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/24 23:34:09 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 static int	is_same(const char *hay, const char *needle, size_t i, size_t len)
 {
 	size_t	j;
-	int		b;
 
 	j = 0;
-	b = 0;
 	while (hay[j] == needle[j] && i < len && hay[j] != '\0')
 	{
 		j++;
