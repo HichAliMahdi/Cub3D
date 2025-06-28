@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:18:21 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:29:54 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/28 07:14:47 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static void	set_player(t_game *game, int x, int y, char dir)
 	game->player.pos_x = x + 0.5;
 	game->player.pos_y = y + 0.5;
 	init_player_direction(&game->player, dir);
-	game->player.move_speed = 0.05;
-	game->player.rot_speed = 0.03;
+	game->player.move_speed = 3.0;
+	game->player.rot_speed = 2.0;
 	game->map[y][x] = '0';
 }
 

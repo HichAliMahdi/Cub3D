@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/20 15:36:44 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/28 07:12:47 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void	resize_hook(int32_t width, int32_t height, void *param)
 static void	game_loop(void *param)
 {
 	t_game	*game;
+	double	delta_time;
 
 	game = (t_game *)param;
-	handle_player_movement(game);
+	delta_time = get_delta_time();
+	handle_player_movement(game, delta_time);
 	render_frame(game);
 	render_player(game);
 }

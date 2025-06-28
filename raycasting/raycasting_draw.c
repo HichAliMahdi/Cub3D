@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:53:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 19:11:50 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/28 07:02:24 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static uint32_t	get_texture_color(t_game *game, t_ray *ray, int tex_y)
 		return (0);
 	pixel = &texture->pixels[pos];
 	color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3];
-	if (ray->side == 1)
-		color = ((color >> 1) & 0x7F7F7F7F);
 	return (color);
 }
 
