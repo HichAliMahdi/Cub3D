@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:41:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/07 20:01:35 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:01:01 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ mlx_image_t	*load_texture(mlx_t *mlx, const char *path)
 	mlx_delete_texture(tex);
 	if (!img)
 	{
-		fprintf(stderr, "Error\nFailed to convert texture to image: %s\n", path);
+		fprintf(stderr, "Error\nFailed to convert texture to image: \
+			%s\n", path);
 		return (NULL);
 	}
 	return (img);

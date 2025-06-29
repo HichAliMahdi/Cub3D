@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:36:48 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/20 01:49:24 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:01:18 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 bool	initialize_game_struct(t_game *game, char *filename)
 {
 	ft_memset(game, 0, sizeof(t_game));
-
 	if (!parse_scene_file(filename, &game->config, &game->map))
 		return (false);
 	if (!validate_map(game->map))

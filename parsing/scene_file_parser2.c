@@ -1,21 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_file_parser2.c                               :+:      :+:    :+:   */
+/*   scene_file_parser2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:30:50 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/27 12:42:32 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:41:31 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+static char	**expand_if_needed(char **lines, int count, int *capacity)
+{
+	if (count >= *capacity - 1)
+	{
+		*capacity *= 2;
+		lines = expand_lines_array(lines, *capacity);
+	}
+	return (lines);
+}
+
+static char	**read_lines_loop(int fd, char **lines, int *count, int *capacity)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		lines = expand_if_needed(lines, *count, capacity);
+		if (!lines)
+			return (NULL);
+		lines[(*count)++] = line;
+		line = get_next_line(fd);
+	}
+	return (lines);
+}
+
 static char	**read_all_lines(int fd, int *line_count)
 {
 	char	**lines;
-	char	*line;
 	int		capacity;
 	int		count;
 
@@ -24,19 +49,9 @@ static char	**read_all_lines(int fd, int *line_count)
 	lines = init_lines_array(capacity);
 	if (!lines)
 		return (NULL);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (count >= capacity - 1)
-		{
-			capacity *= 2;
-			lines = expand_lines_array(lines, capacity);
-			if (!lines)
-				return (NULL);
-		}
-		lines[count++] = line;
-		line = get_next_line(fd);
-	}
+	lines = read_lines_loop(fd, lines, &count, &capacity);
+	if (!lines)
+		return (NULL);
 	lines[count] = NULL;
 	*line_count = count;
 	return (lines);
@@ -55,62 +70,20 @@ static bool	process_scene_element(char *trimmed, t_scene_config *config)
 	return (true);
 }
 
-static int	find_map_start(char **lines, t_scene_config *config)
+int	process_line_logic(char *trimmed, t_scene_config *config,
+	int *is_map)
 {
-	int		i;
-	char	*trimmed;
-
-	i = 0;
-	while (lines[i])
+	if (is_map_line(trimmed))
 	{
-		if (is_empty_line(lines[i]))
-		{
-			i++;
-			continue ;
-		}
-		trimmed = ft_strtrim(lines[i], " \t\n");
-		if (!trimmed)
-			return (-1);
-		if (is_map_line(trimmed))
-		{
-			free(trimmed);
-			return (i);
-		}
-		if (!process_scene_element(trimmed, config))
-		{
-			free(trimmed);
-			return (-1);
-		}
+		*is_map = 1;
 		free(trimmed);
-		i++;
+		return (0);
 	}
-	return (-1);
-}
-
-static int	count_map_lines(char **lines, int start_line)
-{
-	int	i;
-	int	map_lines;
-
-	map_lines = 0;
-	i = start_line;
-	while (lines[i])
+	if (!process_scene_element(trimmed, config))
 	{
-		if (!is_empty_line(lines[i]))
-			map_lines++;
-		i++;
+		free(trimmed);
+		return (-1);
 	}
-	return (map_lines);
-}
-
-static bool	copy_map_line(char **map, char **lines, int *j, int i)
-{
-	map[*j] = ft_strtrim(lines[i], "\n");
-	if (!map[*j])
-	{
-		free_map_lines(map, *j);
-		return (false);
-	}
-	(*j)++;
-	return (true);
+	free(trimmed);
+	return (0);
 }
