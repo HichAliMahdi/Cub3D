@@ -6,7 +6,7 @@
 #    By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/29 20:07:31 by opetrovs         ###   ########.fr        #
+#    Updated: 2025/06/29 20:43:41 by opetrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,10 @@ SRC = main.c rendering.c get_next_line.c game_init.c utils.c \
 	$(PLAYERDIR)/rotate_player.c \
 	$(RAYCASTINGDIR)/raycasting_dda.c $(RAYCASTINGDIR)/raycasting_draw.c \
 	$(RAYCASTINGDIR)/raycasting_init.c $(RAYCASTINGDIR)/raycasting.c \
-	$(PARSEDIR)/scene_file_parser.c $(PARSEDIR)/scene_parsing.c
+	$(PARSEDIR)/scene_file_parser.c $(PARSEDIR)/scene_file_parser2.c \
+	$(PARSEDIR)/scene_file_parser2_utils.c $(PARSEDIR)/scene_parsing.c \
+	$(PARSEDIR)/scene_file_parser3.c $(PARSEDIR)/scene_parsing2.c \
+
 
 # Object files (in build directory)
 OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
