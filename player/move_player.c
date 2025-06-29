@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:23:03 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/28 07:10:32 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:03:53 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// New delta time calculation function
 double	get_delta_time(void)
 {
 	static double	last_time = 0;
@@ -29,7 +28,6 @@ double	get_delta_time(void)
 	return (delta_time);
 }
 
-// Updated move_player function with delta time
 void	move_player(t_game *game, double dir_x, double dir_y, double delta_time)
 {
 	double	new_x;
@@ -51,37 +49,52 @@ void	move_player(t_game *game, double dir_x, double dir_y, double delta_time)
 		game->player.pos_y = new_y;
 }
 
-// Updated movement handling with delta time
-void	handle_player_movement(t_game *game, double delta_time)
+static void	handle_wasd_keys(t_game *game, double *move_x, double *move_y)
 {
-	double	move_x = 0;
-	double	move_y = 0;
-	double	rot_delta = 0;
-
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		move_x += game->player.dir_x;
-		move_y += game->player.dir_y;
+		*move_x += game->player.dir_x;
+		*move_y += game->player.dir_y;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		move_x -= game->player.dir_x;
-		move_y -= game->player.dir_y;
+		*move_x -= game->player.dir_x;
+		*move_y -= game->player.dir_y;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		move_x -= game->player.dir_y;
-		move_y += game->player.dir_x;
+		*move_x -= game->player.dir_y;
+		*move_y += game->player.dir_x;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		move_x += game->player.dir_y;
-		move_y -= game->player.dir_x;
+		*move_x += game->player.dir_y;
+		*move_y -= game->player.dir_x;
 	}
+}
+
+static double	handle_rotation_keys(t_game *game)
+{
+	double	rot_delta;
+
+	rot_delta = 0;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rot_delta -= game->player.rot_speed;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rot_delta += game->player.rot_speed;
+	return (rot_delta);
+}
+
+void	handle_player_movement(t_game *game, double delta_time)
+{
+	double	move_x;
+	double	move_y;
+	double	rot_delta;
+
+	move_x = 0;
+	move_y = 0;
+	handle_wasd_keys(game, &move_x, &move_y);
+	rot_delta = handle_rotation_keys(game);
 	if (move_x != 0 || move_y != 0)
 		move_player(game, move_x, move_y, delta_time);
 	if (rot_delta != 0)
