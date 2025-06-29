@@ -6,7 +6,7 @@
 /*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:30:27 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/29 19:36:42 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 19:39:06 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,19 @@ bool	parse_texture_path(char *line, char **texture_path)
 	return (*texture_path != NULL);
 }
 
-static bool	validate_rgb_values(int r, int g, int b)
-{
-	if (r < 0 || r > 255)
-		return (false);
-	if (g < 0 || g > 255)
-		return (false);
-	if (b < 0 || b > 255)
-		return (false);
-	return (true);
-}
-
-static bool	extract_rgb_values(char **rgb, int *r, int *g, int *b)
+static bool	validate_and_extract_rgb(char **rgb, int *values)
 {
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 		return (false);
-	*r = ft_atoi(rgb[0]);
-	*g = ft_atoi(rgb[1]);
-	*b = ft_atoi(rgb[2]);
+	values[0] = ft_atoi(rgb[0]);
+	values[1] = ft_atoi(rgb[1]);
+	values[2] = ft_atoi(rgb[2]);
+	if (values[0] < 0 || values[0] > 255)
+		return (false);
+	if (values[1] < 0 || values[1] > 255)
+		return (false);
+	if (values[2] < 0 || values[2] > 255)
+		return (false);
 	return (true);
 }
 
