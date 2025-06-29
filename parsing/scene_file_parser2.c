@@ -38,7 +38,7 @@ static char	**read_lines_loop(int fd, char **lines, int *count, int *capacity)
 	return (lines);
 }
 
-static char	**read_all_lines(int fd, int *line_count)
+char	**read_all_lines(int fd, int *line_count)
 {
 	char	**lines;
 	int		capacity;

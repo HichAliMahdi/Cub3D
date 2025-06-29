@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/20 15:37:12 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:00:24 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,18 @@ bool			parse_scene_element(char *line, t_scene_config *config);
 bool			validate_scene_config(t_scene_config *config);
 void			free_scene_config(t_scene_config *config);
 void			check_leaks(void);
+
+bool			is_empty_line(char *line);
+bool			is_map_line(char *line);
+char			**init_lines_array(int capacity);
+char			**expand_lines_array(char **lines, int new_capacity);
+char			**read_all_lines(int fd, int *line_count);
+int				process_config_line(char *line, t_scene_config *config,
+					int *is_map);
+bool			parse_texture_element(char *line, t_scene_config *config);
+bool			parse_color_element(char *line, t_scene_config *config);
+bool			copy_map_line(char **map, char **lines, int *j, int i);
+int				find_map_start(char **lines, t_scene_config *config);
+int				count_map_lines(char **lines, int start_line);
 
 #endif

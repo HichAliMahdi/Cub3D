@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_file_parser2_utils.c                        :+:      :+:    :+:   */
+/*   scene_file_parser2_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 19:45:00 by opetrovs          #+#    #+#             */
-/*   Updated: 2025/06/29 19:45:00 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:04:19 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	process_line(char *line, t_scene_config *config, int *is_map)
+int	process_config_line(char *line, t_scene_config *config, int *is_map)
 {
 	char	*trimmed;
 
@@ -21,7 +21,19 @@ int	process_line(char *line, t_scene_config *config, int *is_map)
 	trimmed = ft_strtrim(line, " \t\n");
 	if (!trimmed)
 		return (-1);
-	return (process_line_logic(trimmed, config, is_map));
+	if (is_map_line(trimmed))
+	{
+		*is_map = 1;
+		free(trimmed);
+		return (0);
+	}
+	if (!parse_scene_element(trimmed, config))
+	{
+		free(trimmed);
+		return (-1);
+	}
+	free(trimmed);
+	return (0);
 }
 
 int	find_map_start(char **lines, t_scene_config *config)
@@ -34,7 +46,7 @@ int	find_map_start(char **lines, t_scene_config *config)
 	while (lines[i])
 	{
 		is_map = 0;
-		result = process_line(lines[i], config, &is_map);
+		result = process_config_line(lines[i], config, &is_map);
 		if (result == -1)
 			return (-1);
 		if (is_map)

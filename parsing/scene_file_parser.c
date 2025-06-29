@@ -6,13 +6,13 @@
 /*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:30:50 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/27 12:42:20 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:44:59 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static bool	is_empty_line(char *line)
+bool	is_empty_line(char *line)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static bool	is_empty_line(char *line)
 	return (true);
 }
 
-static bool	is_map_line(char *line)
+bool	is_map_line(char *line)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ static bool	is_map_line(char *line)
 	return (i > 0);
 }
 
-static char	**init_lines_array(int capacity)
+char	**init_lines_array(int capacity)
 {
 	char	**lines;
 
@@ -53,7 +53,7 @@ static char	**init_lines_array(int capacity)
 	return (lines);
 }
 
-static char	**expand_lines_array(char **lines, int new_capacity)
+char	**expand_lines_array(char **lines, int new_capacity)
 {
 	char	**new_lines;
 

@@ -6,7 +6,7 @@
 #    By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/29 20:43:41 by opetrovs         ###   ########.fr        #
+#    Updated: 2025/06/29 20:59:25 by opetrovs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,6 +145,7 @@ fclean: clean
 	@$(MAKE) -C libft fclean
 	@rm -f $(NAME)
 	@rm -rf $(MLX_BUILD_DIR)
+	@rm -rf MLX42/
 
 # Rebuild everything
 re: fclean all

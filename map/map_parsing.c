@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:58:07 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:13:51 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:45:40 by opetrovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	append_line_to_map(char *line, char ***map, int *lines, int *cap)
 	return (true);
 }
 
-static bool	process_line(char *line, char ***map, int *lines, int *cap)
+bool	process_line(char *line, char ***map, int *lines, int *cap)
 {
 	if (line[0] == '\n')
 		return (true);
