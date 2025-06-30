@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:53:35 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/28 07:02:24 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/30 09:41:45 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	calculate_wall_data(t_ray *ray)
 
 void	setup_texturing(t_game *game, t_ray *ray)
 {
+	mlx_image_t	*texture;
+	double		scale_factor;
+
+	texture = select_texture(game, ray);
+	scale_factor = 0.5;
 	if (ray->side == 0)
 		ray->wall_x = game->player.pos_y + ray->perp_wall_dist * ray->ray_dir_y;
 	else
@@ -84,7 +89,7 @@ void	setup_texturing(t_game *game, t_ray *ray)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
-	ray->step = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->step = scale_factor * texture->height / ray->line_height;
 	ray->tex_pos = (ray->draw_start - SCREEN_HEIGHT / 2
 			+ ray->line_height / 2) * ray->step;
 }
