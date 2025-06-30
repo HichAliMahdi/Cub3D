@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/13 16:40:57 by hali-mah          #+#    #+#              #
-#    Updated: 2025/06/30 20:02:01 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/06/30 20:22:05 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,10 @@ UNAME_M := $(shell uname -m)
 
 # Common settings
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilibft -IMLX42/include
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
+LIBMLX = ./MLX42
+MLX_URL = https://github.com/codam-coding-college/MLX42.git
+INC = -I$(LIBMLX)/include -Ilibft
 
 # Directories
 SRCDIR = .
@@ -23,19 +26,19 @@ MAPDIR = map
 PARSEDIR = parsing
 PLAYERDIR = player
 RAYCASTINGDIR = raycasting
-MLX_DIR = MLX42
 BUILD_DIR = build
-MLX_BUILD_DIR = $(MLX_DIR)/build
 
 # Architecture-specific settings
 ifeq ($(UNAME_M),arm64)
+	# ARM MacBook (Apple Silicon) - using Homebrew
 	GLFW_PREFIX := $(shell brew --prefix glfw 2>/dev/null || echo "/opt/homebrew")
 	GLFW_INC := $(GLFW_PREFIX)/include
 	GLFW_LIB := $(GLFW_PREFIX)/lib
-	CFLAGS += -I$(GLFW_INC)
-	LIBS = -L$(GLFW_LIB) -lglfw -ldl -framework OpenGL -framework Cocoa -pthread -lm
+	INC += -I$(GLFW_INC)
+	LIBS = $(LIBMLX)/build/libmlx42.a -L$(GLFW_LIB) -lglfw -ldl -framework OpenGL -framework Cocoa -pthread -lm
 else
-	LIBS = -lglfw -ldl -framework OpenGL -framework Cocoa -pthread -lm
+	# Intel MacBook - using system libraries
+	LIBS = $(LIBMLX)/build/libmlx42.a -lglfw -ldl -framework OpenGL -framework Cocoa -pthread -lm
 endif
 
 # Source files
@@ -53,18 +56,18 @@ SRC = main.c rendering.c get_next_line.c game_init.c utils.c \
 	$(PARSEDIR)/scene_file_parser2_utils.c $(PARSEDIR)/scene_parsing.c \
 	$(PARSEDIR)/scene_file_parser3.c $(PARSEDIR)/scene_parsing2.c
 
-# Object files
+# Object files (in build directory)
 OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
 
-# Output binary
+# Output
 NAME = cub3D
 
 # Libraries
 LIBFT = libft/libft.a
-MLX_LIB = $(MLX_BUILD_DIR)/libmlx42.a
+MLX_LIB = $(LIBMLX)/build/libmlx42.a
 
 # Default target
-all: check-tools check-submodule $(NAME)
+all: libmlx $(NAME)
 
 # Create build directories
 $(BUILD_DIR):
@@ -74,116 +77,99 @@ $(BUILD_DIR):
 	@mkdir -p $(BUILD_DIR)/$(PLAYERDIR)
 	@mkdir -p $(BUILD_DIR)/$(RAYCASTINGDIR)
 
-# Linking
-$(NAME): $(BUILD_DIR) $(OBJ) $(LIBFT) $(MLX_LIB)
-	@echo "🔗 Linking $(NAME)..."
-	$(CC) $(OBJ) $(LIBFT) $(MLX_LIB) $(LIBS) -o $(NAME)
-	@echo "✅ $(NAME) built successfully!"
+# Clone and build MLX42
+libmlx:
+	@echo "Checking if MLX42 library exists..."
+	@if [ ! -f "$(MLX_LIB)" ]; then \
+		if [ -d "$(LIBMLX)" ]; then \
+			echo "MLX42 directory exists but library not built. Building..."; \
+		else \
+			echo "Cloning MLX42 from GitHub..."; \
+			git clone $(MLX_URL) $(LIBMLX); \
+		fi; \
+		echo "Building MLX42..."; \
+		cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4; \
+	else \
+		echo "MLX42 library already exists, skipping build."; \
+	fi
 
-# Compile source files
+# Link final binary
+$(NAME): $(BUILD_DIR) $(OBJ) $(LIBFT) $(MLX_LIB)
+	@echo "Linking $(NAME)..."
+	$(CC) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME)
+	@echo "✅ $(NAME) created successfully!"
+
+# Compile source files to object files in build folder
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	@echo "🛠️  Compiling $<..."
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiling $<..."
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Build libft
 $(LIBFT):
-	@echo "📦 Building libft..."
+	@echo "Building libft..."
 	@$(MAKE) -C libft
 
-# Check tools
-.PHONY: check-tools
-check-tools:
-	@command -v cmake >/dev/null 2>&1 || { echo "❌ cmake not found. Please install it."; exit 1; }
-ifeq ($(UNAME_M),arm64)
-	@command -v brew >/dev/null 2>&1 || { echo "❌ brew not found. Please install Homebrew."; exit 1; }
-endif
-
-# Submodule check
-.PHONY: check-submodule
-check-submodule:
-	@echo "🔍 Checking MLX42 submodule..."
-	@if [ ! -d "$(MLX_DIR)" ] || [ -z "$$(ls -A $(MLX_DIR) 2>/dev/null)" ]; then \
-		echo "🚧 Initializing MLX42 submodule..."; \
-		git submodule update --init --recursive || { \
-			echo "❌ Submodule initialization failed."; exit 1; }; \
-	else \
-		echo "✅ MLX42 submodule is ready."; \
-	fi
-
-# MLX42 build
-$(MLX_LIB): check-submodule
-	@echo "🔧 Ensuring MLX42 build..."
-	@if [ ! -f "$@" ]; then \
-		$(MAKE) build-mlx42 || { echo "❌ MLX42 build failed."; exit 1; }; \
-	fi
-
-.PHONY: build-mlx42
-build-mlx42:
-	@echo "🧱 Building MLX42..."
-	@mkdir -p $(MLX_BUILD_DIR)
-	@cd $(MLX_DIR) && cmake -B build -S . && cmake --build build
-	@echo "✅ MLX42 built successfully!"
-
-# Manual bootstrap for first-time setup
-.PHONY: bootstrap
-bootstrap:
-	@echo "🚀 Bootstrapping project..."
-	git submodule update --init --recursive
-	@$(MAKE) $(LIBFT)
-	@$(MAKE) $(MLX_LIB)
-	@echo "✅ Bootstrap complete. You can now run 'make'!"
-
-# Clean
-.PHONY: clean
+# Clean object files
 clean:
-	@echo "🧹 Cleaning object files..."
+	@echo "Cleaning object files..."
 	@$(MAKE) -C libft clean
 	@rm -rf $(BUILD_DIR)
+	@if [ -d "$(LIBMLX)/build" ]; then rm -rf $(LIBMLX)/build; fi
 
 # Full clean
-.PHONY: fclean
 fclean: clean
-	@echo "🧨 Full clean..."
+	@echo "Full clean..."
 	@$(MAKE) -C libft fclean
 	@rm -f $(NAME)
-	@rm -rf $(MLX_BUILD_DIR)
-	@rm -rf $(MLX_DIR)
+	@rm -rf $(LIBMLX)
 
-# Rebuild all
-.PHONY: re
+# Clean MLX42 but keep the directory structure
+clean-mlx:
+	@echo "Cleaning MLX42 build files..."
+	@rm -rf $(LIBMLX)/build
+
+# Rebuild everything
 re: fclean all
 
-# Rebuild MLX
-.PHONY: rebuild-mlx
+# Force rebuild MLX42
 rebuild-mlx:
-	@echo "🔄 Rebuilding MLX42..."
-	@rm -rf $(MLX_BUILD_DIR)
-	@$(MAKE) $(MLX_LIB)
+	@echo "Force rebuilding MLX42..."
+	@rm -rf $(LIBMLX)
+	@$(MAKE) libmlx
 
-# Debug info
-.PHONY: debug
+# Debug target to check variables and paths
 debug:
-	@echo "🔎 Debug Information:"
+	@echo "=== Debug Information ==="
 	@echo "Architecture: $(UNAME_M)"
 	@echo "Source files: $(SRC)"
 	@echo "Object files: $(OBJ)"
+	@echo "Build directory: $(BUILD_DIR)"
+	@echo "MLX lib: $(MLX_LIB)"
+	@echo "Libft: $(LIBFT)"
 	@echo "CFLAGS: $(CFLAGS)"
+	@echo "INC: $(INC)"
 	@echo "LIBS: $(LIBS)"
 ifeq ($(UNAME_M),arm64)
 	@echo "GLFW prefix: $(GLFW_PREFIX)"
 	@echo "GLFW include: $(GLFW_INC)"
 	@echo "GLFW lib: $(GLFW_LIB)"
 endif
+	@echo "MLX42 directory exists: $$(if [ -d '$(LIBMLX)' ]; then echo 'YES'; else echo 'NO'; fi)"
+	@echo "MLX42 header exists: $$(if [ -f '$(LIBMLX)/include/MLX42/MLX42.h' ]; then echo 'YES'; else echo 'NO'; fi)"
+	@echo "MLX42 lib exists: $$(if [ -f '$(MLX_LIB)' ]; then echo 'YES'; else echo 'NO'; fi)"
+	@echo "========================="
 
-# Help
-.PHONY: help
+# Show help
 help:
-	@echo "📚 Available targets:"
+	@echo "Available targets:"
 	@echo "  all              - Build the project"
 	@echo "  clean            - Remove object files"
 	@echo "  fclean           - Remove all generated files"
+	@echo "  clean-mlx        - Clean MLX42 build files only"
 	@echo "  re               - Rebuild everything"
-	@echo "  bootstrap        - Run first-time setup (submodules + libs)"
 	@echo "  rebuild-mlx      - Force rebuild MLX42"
+	@echo "  libmlx           - Clone and build MLX42"
 	@echo "  debug            - Show debug information"
 	@echo "  help             - Show this help"
+
+.PHONY: all clean fclean re debug help libmlx clean-mlx rebuild-mlx
