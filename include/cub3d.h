@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/30 20:16:25 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:27:24 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ bool			parse_color(char *line, t_color *color);
 bool			parse_scene_element(char *line, t_scene_config *config);
 bool			validate_scene_config(t_scene_config *config);
 void			free_scene_config(t_scene_config *config);
-void			check_leaks(void);
 
 bool			is_empty_line(char *line);
 bool			is_map_line(char *line);

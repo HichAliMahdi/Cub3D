@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/28 07:12:47 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/06/30 20:26:00 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	atexit(check_leaks);
 	if (argc != 2)
 	{
 		printf("Usage: %s <map_file.cub>\n", argv[0]);
