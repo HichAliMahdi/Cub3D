@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:23:10 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/23 08:14:21 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/07/01 11:19:42 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	is_wall_with_padding(t_game *game, double x, double y)
 {
 	double	padding;
 
-	padding = 0.1;
+	padding = 0.25;
 	if (is_wall(game, x - padding, y - padding)
 		|| is_wall(game, x + padding, y - padding)
 		|| is_wall(game, x - padding, y + padding)

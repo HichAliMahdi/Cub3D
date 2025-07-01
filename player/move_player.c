@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:23:03 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/29 20:03:53 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/07/01 11:18:32 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	move_player(t_game *game, double dir_x, double dir_y, double delta_time)
 	speed = game->player.move_speed * delta_time;
 	new_x = game->player.pos_x + dir_x * speed;
 	new_y = game->player.pos_y + dir_y * speed;
-	if (!is_wall(game, new_x, game->player.pos_y))
+	if (!is_wall_with_padding(game, new_x, game->player.pos_y))
 		game->player.pos_x = new_x;
-	if (!is_wall(game, game->player.pos_x, new_y))
+	if (!is_wall_with_padding(game, game->player.pos_x, new_y))
 		game->player.pos_y = new_y;
 }
 
