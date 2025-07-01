@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:01:37 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/23 22:17:32 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 12:51:48 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ void	free_map_lines(char **map, int count);
 bool	resize_map(char ***map, int *cap, int lines);
 bool	validate_map(char **map);
 void	free_map(char **map);
+bool	has_cub_extension(const char *filename);
+bool	validate_file_extension(const char *filename);
 
 #endif

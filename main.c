@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:21:30 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/30 20:26:00 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 12:52:58 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	main(int argc, char **argv)
 		printf("Usage: %s <map_file.cub>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
+	if (!validate_file_extension(argv[1]))
+		return (EXIT_FAILURE);
 	if (!init_game(&game, argv[1]))
 	{
 		cleanup(&game);
