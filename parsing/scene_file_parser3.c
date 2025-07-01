@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_file_parser3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:30:50 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/27 12:42:13 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:28:01 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,14 @@ static bool	validate_and_parse_map(char **lines, t_scene_config *config,
 	int	map_start;
 
 	map_start = find_map_start(lines, config);
-	if (map_start == -1 || !validate_scene_config(config))
+	if (map_start == -1)
 	{
 		free_map(lines);
-		free_scene_config(config);
+		return (false);
+	}
+	if (!validate_scene_config(config))
+	{
+		free_map(lines);
 		return (false);
 	}
 	*map = parse_map_from_lines(lines, map_start);
@@ -78,7 +82,6 @@ static bool	validate_and_parse_map(char **lines, t_scene_config *config,
 	if (!*map)
 	{
 		fprintf(stderr, "Error\nFailed to parse map\n");
-		free_scene_config(config);
 		return (false);
 	}
 	return (true);
