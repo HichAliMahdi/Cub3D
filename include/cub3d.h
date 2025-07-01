@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:19:47 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/30 20:27:24 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:03:52 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,7 @@ bool			parse_color_element(char *line, t_scene_config *config);
 bool			copy_map_line(char **map, char **lines, int *j, int i);
 int				find_map_start(char **lines, t_scene_config *config);
 int				count_map_lines(char **lines, int start_line);
+
+// void			check_leaks(void);
 
 #endif
