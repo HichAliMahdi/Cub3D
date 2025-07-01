@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:36:48 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/29 20:01:18 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:31:28 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool	initialize_game_struct(t_game *game, char *filename)
 	{
 		fprintf(stderr, "Error\nInvalid map\n");
 		free_map(game->map);
+		game->map = NULL;
 		free_scene_config(&game->config);
 		return (false);
 	}
@@ -28,6 +29,7 @@ bool	initialize_game_struct(t_game *game, char *filename)
 	if (!game->mlx)
 	{
 		free_map(game->map);
+		game->map = NULL;
 		free_scene_config(&game->config);
 		return (false);
 	}

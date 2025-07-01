@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:34:25 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/07/01 20:20:23 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:35:55 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	free_textures(t_game *game)
 {
+	if (!game->textures)
+		return ;
 	if (game->textures->wall)
 		mlx_delete_image(game->mlx, game->textures->wall);
 	if (game->textures->floor)
@@ -36,6 +38,8 @@ static void	free_textures(t_game *game)
 
 void	cleanup(t_game *game)
 {
+	if (!game)
+		return ;
 	if (game->map)
 	{
 		free_map(game->map);
