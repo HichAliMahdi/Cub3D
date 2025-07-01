@@ -6,7 +6,7 @@
 #    By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 11:21:49 by hali-mah          #+#    #+#              #
-#    Updated: 2025/07/01 12:55:31 by hali-mah         ###   ########.fr        #
+#    Updated: 2025/07/01 19:08:36 by hali-mah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = libft.a
 
 # Compiler and flags
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Source files && bonus and object files with object bonus
