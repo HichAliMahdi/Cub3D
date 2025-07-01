@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 17:34:25 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/07/01 13:04:12 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:20:23 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	cleanup(t_game *game)
 	free_scene_config(&game->config);
 }
 
-//void	check_leaks(void)
-//{
-//	system("leaks cub3D");
-//}
+void	check_leaks(void)
+{
+	system("leaks cub3D");
+}
 
 /*
 Add this to the main to check leaks

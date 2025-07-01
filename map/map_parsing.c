@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opetrovs <opetrovs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:58:07 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/06/29 20:45:40 by opetrovs         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:23:31 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static bool	append_line_to_map(char *line, char ***map, int *lines, int *cap)
 	if (!(*map)[*lines])
 	{
 		free_map_lines(*map, *lines);
+		*map = NULL;
 		return (false);
 	}
 	(*lines)++;
@@ -79,18 +80,17 @@ char	**parse_map(const char *filename)
 	int		fd;
 	char	**map;
 	int		lines;
+	bool	read_success;
 
 	map = NULL;
 	lines = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	if (!read_lines(fd, &map, &lines))
-	{
-		close(fd);
-		return (NULL);
-	}
+	read_success = read_lines(fd, &map, &lines);
 	close(fd);
+	if (!read_success)
+		return (NULL);
 	if (!validate_map(map))
 	{
 		free_map(map);

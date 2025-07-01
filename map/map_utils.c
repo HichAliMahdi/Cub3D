@@ -6,7 +6,7 @@
 /*   By: hali-mah <hali-mah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 16:25:14 by hali-mah          #+#    #+#             */
-/*   Updated: 2025/05/13 17:02:04 by hali-mah         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:18:38 by hali-mah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ bool	resize_map(char ***map, int *cap, int lines)
 	if (!new_map)
 	{
 		free_map_lines(*map, lines);
+		*map = NULL;
 		return (false);
 	}
 	i = 0;
